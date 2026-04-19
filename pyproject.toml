@@ -1,12 +1,12 @@
 [project]
-name = "llm-trial"
+name = "llm-meter"
 version = "0.1.0"
 description = "Automated LLM usage and friction tracking across machines"
 requires-python = ">=3.11"
 dependencies = []
 
 [project.scripts]
-llm-trial = "llm_trial:main"
+llm-meter = "llm_meter:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -6,14 +6,14 @@ import subprocess
 from pathlib import Path
 
 
-SCHEDULE_LABEL = "dev.illusion.llm-trial"
+SCHEDULE_LABEL = "dev.illusion.llm-meter"
 
 
 def scheduler_command(project_dir: Path, state_dir: Path) -> str:
     log_path = state_dir / "scheduler.log"
     return (
         f"cd {shlex.quote(str(project_dir))} && "
-        f"uv run llm-trial capture --non-interactive "
+        f"uv run llm-meter capture --non-interactive "
         f">> {shlex.quote(str(log_path))} 2>&1"
     )
 
@@ -63,13 +63,13 @@ def install_schedule(project_dir: Path, capture_time: str, state_dir: Path) -> P
 
     service_path.write_text(
         "[Unit]\n"
-        "Description=LLM trial daily capture\n\n"
+        "Description=LLM meter daily capture\n\n"
         "[Service]\n"
         f"ExecStart=/bin/sh -lc '{scheduler_command(project_dir, state_dir)}'\n"
     )
     timer_path.write_text(
         "[Unit]\n"
-        "Description=Run LLM trial capture daily\n\n"
+        "Description=Run LLM meter capture daily\n\n"
         "[Timer]\n"
         f"OnCalendar=*-*-* {int(hour_text):02d}:{int(minute_text):02d}:00\n"
         "Persistent=true\n\n"

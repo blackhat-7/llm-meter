@@ -15,6 +15,14 @@ DEFAULT_ESTIMATED_MINUTES = {
 }
 
 
+def config_root() -> Path:
+    return Path.home() / ".config"
+
+
+def state_root() -> Path:
+    return Path.home() / ".local" / "state"
+
+
 @dataclass(frozen=True)
 class Machine:
     name: str
@@ -25,11 +33,19 @@ class Machine:
 
 
 def default_config_path() -> Path:
-    return Path.home() / ".config" / "llm-trial" / "config.json"
+    preferred = config_root() / "llm-meter" / "config.json"
+    legacy = config_root() / "llm-trial" / "config.json"
+    if preferred.exists() or not legacy.exists():
+        return preferred
+    return legacy
 
 
 def default_state_dir() -> Path:
-    return Path.home() / ".local" / "state" / "llm-trial"
+    preferred = state_root() / "llm-meter"
+    legacy = state_root() / "llm-trial"
+    if preferred.exists() or not legacy.exists():
+        return preferred
+    return legacy
 
 
 def save_json(path: Path, payload: dict[str, Any]) -> None:

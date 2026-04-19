@@ -1,4 +1,4 @@
-# llm-trial
+# llm-meter
 
 Tracks whether a higher LLM plan is worth it.
 
@@ -11,11 +11,11 @@ It does 3 things:
 ## Setup
 
 ```bash
-cd ~/Documents/projects/llm-trial
-uv run llm-trial init-config
+cd ~/Documents/projects/llm-meter
+uv run llm-meter init-config
 ```
 
-Edit `~/.config/llm-trial/config.json`.
+Edit `~/.config/llm-meter/config.json`.
 
 Minimal example:
 
@@ -53,50 +53,50 @@ Minimal example:
 Start baseline and backdate it if needed:
 
 ```bash
-uv run llm-trial phase-start baseline --date 2026-03-20
+uv run llm-meter phase-start baseline --date 2026-03-20
 ```
 
 Switch to max later:
 
 ```bash
-uv run llm-trial phase-start max
+uv run llm-meter phase-start max
 ```
 
 Manual friction capture for current phase:
 
 ```bash
-uv run llm-trial capture
+uv run llm-meter capture
 ```
 
 Zero-input capture:
 
 ```bash
-uv run llm-trial capture --non-interactive
+uv run llm-meter capture --non-interactive
 ```
 
 Phase report:
 
 ```bash
-uv run llm-trial report
+uv run llm-meter report
 ```
 
 Last 30 days without phases:
 
 ```bash
-uv run llm-trial report --last 30
+uv run llm-meter report --last 30
 ```
 
 Custom range:
 
 ```bash
-uv run llm-trial report --since 2026-03-20 --until 2026-04-19
+uv run llm-meter report --since 2026-03-20 --until 2026-04-19
 ```
 
 Scheduler:
 
 ```bash
-uv run llm-trial install-schedule --time 21:00
-uv run llm-trial uninstall-schedule
+uv run llm-meter install-schedule --time 21:00
+uv run llm-meter uninstall-schedule
 ```
 
 Scheduled captures follow the current phase.
@@ -105,25 +105,25 @@ Scheduled captures follow the current phase.
 
 Before the trial starts:
 
-1. run `uv run llm-trial phase-start baseline --date YYYY-MM-DD`
+1. run `uv run llm-meter phase-start baseline --date YYYY-MM-DD`
 2. use `--date` to backdate the start if you want older history included
 
 Normal day:
 
 1. do nothing for usage tracking
-2. optionally run `uv run llm-trial capture` once at the end of the day if you want manual friction notes
+2. optionally run `uv run llm-meter capture` once at the end of the day if you want manual friction notes
 3. if you installed the scheduler, it can run `capture --non-interactive` automatically
 
 When you want stats:
 
-1. run `uv run llm-trial report` for phase-based comparison
-2. run `uv run llm-trial report --last 30` for a rolling month view
+1. run `uv run llm-meter report` for phase-based comparison
+2. run `uv run llm-meter report --last 30` for a rolling month view
 
 When you upgrade from baseline to max:
 
-1. run `uv run llm-trial phase-start max`
+1. run `uv run llm-meter phase-start max`
 2. from that point, new captures go to `max`
-3. run `uv run llm-trial report` later to compare `baseline` vs `max`
+3. run `uv run llm-meter report` later to compare `baseline` vs `max`
 
 ## Important note on switching mid-day
 
@@ -138,10 +138,14 @@ Best practice:
 
 ## Data
 
-- config: `~/.config/llm-trial/config.json`
-- phase metadata: `~/.local/state/llm-trial/<phase>/phase.json`
-- state: `~/.local/state/llm-trial/state.json`
-- captures: `~/.local/state/llm-trial/<phase>/captures/YYYY-MM-DDTHHMMSS.json`
+- config: `~/.config/llm-meter/config.json`
+- phase metadata: `~/.local/state/llm-meter/<phase>/phase.json`
+- state: `~/.local/state/llm-meter/state.json`
+- captures: `~/.local/state/llm-meter/<phase>/captures/YYYY-MM-DDTHHMMSS.json`
+
+Legacy note:
+
+- if you already used the older `llm-trial` name, the CLI auto-detects legacy config/state paths
 
 ## What is detected
 

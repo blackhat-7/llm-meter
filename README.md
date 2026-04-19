@@ -143,6 +143,15 @@ Best practice:
 - state: `~/.local/state/llm-meter/state.json`
 - captures: `~/.local/state/llm-meter/<phase>/captures/YYYY-MM-DDTHHMMSS.json`
 
+## Data retention
+
+Do not delete these if you want to retain historical usage data:
+
+- `~/.claude/projects`
+- `~/.local/share/opencode/storage/message`
+- `~/.config/llm-meter`
+- `~/.local/state/llm-meter`
+
 
 ## What is detected
 

@@ -143,9 +143,6 @@ Best practice:
 - state: `~/.local/state/llm-meter/state.json`
 - captures: `~/.local/state/llm-meter/<phase>/captures/YYYY-MM-DDTHHMMSS.json`
 
-Legacy note:
-
-- if you already used the older `llm-trial` name, the CLI auto-detects legacy config/state paths
 
 ## What is detected
 

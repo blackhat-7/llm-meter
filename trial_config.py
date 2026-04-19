@@ -33,19 +33,11 @@ class Machine:
 
 
 def default_config_path() -> Path:
-    preferred = config_root() / "llm-meter" / "config.json"
-    legacy = config_root() / "llm-trial" / "config.json"
-    if preferred.exists() or not legacy.exists():
-        return preferred
-    return legacy
+    return config_root() / "llm-meter" / "config.json"
 
 
 def default_state_dir() -> Path:
-    preferred = state_root() / "llm-meter"
-    legacy = state_root() / "llm-trial"
-    if preferred.exists() or not legacy.exists():
-        return preferred
-    return legacy
+    return state_root() / "llm-meter"
 
 
 def save_json(path: Path, payload: dict[str, Any]) -> None:
